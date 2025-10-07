@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Camera } from 'lucide-react';
 import GalleryModal from '@/components/GalleryModal';
 import {
@@ -9,10 +9,14 @@ import {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  type CarouselApi,
 } from '@/components/ui/carousel';
 
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [emblaApi, setEmblaApi] = useState<CarouselApi | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const autoplayRef = useRef<number | null>(null);
 
   const galleryImages = [
     'https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -54,7 +58,22 @@ export default function GallerySection() {
         </div>
 
         {/* Responsive carousel: single slide on mobile, 3-per-view on md+ */}
-        <Carousel className="relative">
+        <Carousel
+          className="relative"
+          setApi={(api) => setEmblaApi(api)}
+          opts={{ loop: true, align: 'start' }}
+          onMouseEnter={() => {
+            if (autoplayRef.current) {
+              window.clearInterval(autoplayRef.current);
+              autoplayRef.current = null;
+            }
+          }}
+          onMouseLeave={() => {
+            if (!autoplayRef.current) {
+              autoplayRef.current = window.setInterval(() => emblaApi?.scrollNext(), 4000);
+            }
+          }}
+        >
           <CarouselContent className="w-full">
             {galleryImages.map((image, index) => (
               <CarouselItem
@@ -89,6 +108,23 @@ export default function GallerySection() {
             <CarouselNext />
           </div>
         </Carousel>
+
+        {/* Thumbnails / preview row */}
+        <div className="mt-4 flex gap-2 justify-center overflow-x-auto px-2">
+          {galleryImages.map((thumb, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                emblaApi?.scrollTo(i);
+              }}
+              className={`flex-none w-20 h-20 rounded-md overflow-hidden border-2 ${
+                i === currentIndex ? 'border-brand' : 'border-transparent'
+              } focus:outline-none focus:ring-2 focus:ring-brand`}
+            >
+              <img src={thumb} alt={`Preview ${i + 1}`} className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
       </div>
 
       {selectedImage !== null && (
