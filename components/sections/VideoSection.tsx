@@ -13,7 +13,7 @@ export default function VideoSection() {
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-800 mb-6">
             A Special <span className="text-pink-600">Tribute</span>
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-brand to-transparent mx-auto mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Watch this heartfelt video celebration of an extraordinary life
           </p>
