@@ -80,11 +80,11 @@ export default function WishesSection() {
   };
 
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-pink-50 to-cream-50">
+    <section className="relative py-12 px-4 bg-gradient-to-b from-pink-50 to-cream-50">
       <Confetti trigger={showConfetti} onComplete={() => setShowConfetti(false)} />
 
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="flex items-center justify-center mb-4">
             <Heart className="w-12 h-12 text-red-500 fill-red-500" />
           </div>
@@ -97,8 +97,8 @@ export default function WishesSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-12">
-          <div className="bg-white rounded-3xl shadow-2xl p-8">
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          <div className="bg-white rounded-3xl shadow-2xl p-6">
             <h3 className="font-serif text-2xl text-gray-800 mb-6">Send Your Message</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -147,7 +147,7 @@ export default function WishesSection() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold py-6 text-lg rounded-xl"
+                className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold py-3 text-md rounded-lg"
               >
                 {isSubmitting ? (
                   <>
