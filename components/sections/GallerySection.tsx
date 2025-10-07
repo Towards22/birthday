@@ -1,19 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Camera } from 'lucide-react';
 import GalleryModal from '@/components/GalleryModal';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
+} from '@/components/ui/carousel';
 
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [emblaApi, setEmblaApi] = useState<CarouselApi | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const autoplayRef = useRef<number | null>(null);
 
   const galleryImages = [
-    'https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1657110/pexels-photo-1657110.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1046896/pexels-photo-1046896.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/3285203/pexels-photo-3285203.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875670/IMG-20251007-WA0082_tqbq3t.jpg',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875569/4_l8jqn1.jpg',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875568/2_kq1gxm.jpg',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875568/1_drhbge.jpg',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875567/IMG-20251007-WA0081_cuwjdv.jpg',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875567/IMG-20251007-WA0080_exwqcl.jpg',
+    'https://res.cloudinary.com/ddxssowqb/image/upload/v1759875567/3_acvqe9.jpg',
   ];
 
   const handleNext = () => {
@@ -30,40 +42,116 @@ export default function GallerySection() {
     }
   };
 
+  // Autoplay + sync current index with embla
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      const idx = emblaApi.selectedScrollSnap();
+      setCurrentIndex(idx);
+    };
+
+    emblaApi.on('select', onSelect);
+    onSelect();
+
+    // start autoplay
+    if (!autoplayRef.current) {
+      autoplayRef.current = window.setInterval(() => {
+        emblaApi.scrollNext();
+      }, 4000);
+    }
+
+    return () => {
+      emblaApi.off('select', onSelect);
+      if (autoplayRef.current) {
+        window.clearInterval(autoplayRef.current);
+        autoplayRef.current = null;
+      }
+    };
+  }, [emblaApi]);
+
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-white to-blue-50">
+    <section className="relative py-12 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="flex items-center justify-center mb-4">
             <Camera className="w-12 h-12 text-blue-900" />
           </div>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-800 mb-6">
             A Journey Through <span className="text-blue-900">Time</span>
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-brand to-transparent mx-auto mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Celebrating precious memories and cherished moments from seven decades of life
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryImages.map((image, index) => (
-            <div
-              key={index}
-              onClick={() => setSelectedImage(index)}
-              className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
+        {/* Responsive carousel: single slide on mobile, 3-per-view on md+ */}
+        <Carousel
+          className="relative"
+          setApi={(api) => setEmblaApi(api)}
+          opts={{ loop: true, align: 'start' }}
+          onMouseEnter={() => {
+            if (autoplayRef.current) {
+              window.clearInterval(autoplayRef.current);
+              autoplayRef.current = null;
+            }
+          }}
+          onMouseLeave={() => {
+            if (!autoplayRef.current) {
+              autoplayRef.current = window.setInterval(() => emblaApi?.scrollNext(), 4000);
+            }
+          }}
+        >
+          <CarouselContent className="w-full">
+            {galleryImages.map((image, index) => (
+              <CarouselItem
+                key={index}
+                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 basis-full"
+                onClick={() => setSelectedImage(index)}
+              >
+                <div className="w-full h-64 md:h-80 lg:h-96 overflow-hidden">
+                  <img
+                    src={image}
+                    alt={`Memory ${index + 1}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <Camera className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* Navigation controls for larger screens */}
+          <CarouselPrevious className="hidden md:block" />
+          <CarouselNext className="hidden md:block" />
+
+          {/* Mobile nav overlay (visible on mobile) */}
+          <div className="absolute left-2 top-1/2 -translate-y-1/2 md:hidden">
+            <CarouselPrevious />
+          </div>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 md:hidden">
+            <CarouselNext />
+          </div>
+        </Carousel>
+
+        {/* Thumbnails / preview row */}
+        <div className="mt-4 flex gap-2 justify-center overflow-x-auto px-2">
+          {galleryImages.map((thumb, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                emblaApi?.scrollTo(i);
+              }}
+              className={`flex-none w-20 h-20 rounded-md overflow-hidden border-2 ${
+                i === currentIndex ? 'border-brand' : 'border-transparent'
+              } focus:outline-none focus:ring-2 focus:ring-brand`}
             >
-              <div className="aspect-square">
-                <img
-                  src={image}
-                  alt={`Memory ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                <Camera className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            </div>
+              <img src={thumb} alt={`Preview ${i + 1}`} className="w-full h-full object-cover" />
+            </button>
           ))}
         </div>
       </div>
