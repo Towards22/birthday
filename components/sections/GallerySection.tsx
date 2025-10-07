@@ -40,7 +40,7 @@ export default function GallerySection() {
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-800 mb-6">
             A Journey Through <span className="text-blue-900">Time</span>
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-brand to-transparent mx-auto mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Celebrating precious memories and cherished moments from seven decades of life
           </p>
