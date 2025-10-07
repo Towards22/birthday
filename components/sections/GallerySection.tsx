@@ -3,6 +3,13 @@
 import { useState } from 'react';
 import { Camera } from 'lucide-react';
 import GalleryModal from '@/components/GalleryModal';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from '@/components/ui/carousel';
 
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -46,26 +53,42 @@ export default function GallerySection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {galleryImages.map((image, index) => (
-            <div
-              key={index}
-              onClick={() => setSelectedImage(index)}
-              className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="aspect-square">
-                <img
-                  src={image}
-                  alt={`Memory ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                <Camera className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Responsive carousel: single slide on mobile, 3-per-view on md+ */}
+        <Carousel className="relative">
+          <CarouselContent className="w-full">
+            {galleryImages.map((image, index) => (
+              <CarouselItem
+                key={index}
+                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 md:basis-1/3"
+                onClick={() => setSelectedImage(index)}
+              >
+                <div className="aspect-square">
+                  <img
+                    src={image}
+                    alt={`Memory ${index + 1}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <Camera className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* Navigation controls for larger screens */}
+          <CarouselPrevious className="hidden md:block" />
+          <CarouselNext className="hidden md:block" />
+
+          {/* Mobile nav overlay (visible on mobile) */}
+          <div className="absolute left-2 top-1/2 -translate-y-1/2 md:hidden">
+            <CarouselPrevious />
+          </div>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 md:hidden">
+            <CarouselNext />
+          </div>
+        </Carousel>
       </div>
 
       {selectedImage !== null && (
