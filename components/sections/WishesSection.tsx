@@ -80,7 +80,7 @@ export default function WishesSection() {
   };
 
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-pink-50 to-yellow-50">
+    <section className="relative py-20 px-4 bg-gradient-to-b from-pink-50 to-cream-50">
       <Confetti trigger={showConfetti} onComplete={() => setShowConfetti(false)} />
 
       <div className="max-w-7xl mx-auto">
@@ -91,7 +91,7 @@ export default function WishesSection() {
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-800 mb-6">
             Share Your <span className="text-red-500">Birthday Wishes</span>
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-brand to-transparent mx-auto mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Leave a heartfelt message to celebrate this special milestone
           </p>
