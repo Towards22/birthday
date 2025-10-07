@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Share2, MessageSquare, Facebook, Twitter } from 'lucide-react';
+import { Heart, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface FooterSectionProps {
@@ -33,56 +33,52 @@ export default function FooterSection({ celebrantName }: FooterSectionProps) {
   };
 
   return (
-    <footer className="bg-background border-t border-border">
-      <div className="max-w-6xl mx-auto py-10 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <div className="flex items-center justify-center md:justify-start">
-            <Share2 className="w-10 h-10 text-foreground" />
+    <footer className="relative py-16 px-4 bg-gradient-to-b from-yellow-50 to-blue-900">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <Share2 className="w-10 h-10 text-white" />
           </div>
+          <h3 className="font-serif text-3xl md:text-4xl text-white mb-4">
+            Share the Celebration
+          </h3>
+          <p className="text-blue-100 mb-8">
+            Help us spread the joy by sharing this special page
+          </p>
 
-          <div className="text-center animate-fadeIn">
-            <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-1">Share the Celebration</h3>
-            <p className="text-muted-foreground max-w-xl mx-auto">Help us spread the joy by sharing this special page</p>
-
-            <div className="mt-4 flex flex-wrap gap-3 justify-center md:justify-start">
-              <Button
-                onClick={shareOnWhatsApp}
-                size="icon"
-                variant="ghost"
-                className="hover:bg-brand/10 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
-                aria-label="Share on WhatsApp"
-              >
-                <MessageSquare className="w-5 h-5 text-foreground" />
-              </Button>
-
-              <Button
-                onClick={shareOnFacebook}
-                size="icon"
-                variant="ghost"
-                className="hover:bg-blue-600/10 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-                aria-label="Share on Facebook"
-              >
-                <Facebook className="w-5 h-5 text-blue-600" />
-              </Button>
-
-              <Button
-                onClick={shareOnTwitter}
-                size="icon"
-                variant="ghost"
-                className="hover:bg-sky-500/10 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
-                aria-label="Share on Twitter"
-              >
-                <Twitter className="w-5 h-5 text-sky-500" />
-              </Button>
-            </div>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button
+              onClick={shareOnWhatsApp}
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full"
+            >
+              Share on WhatsApp
+            </Button>
+            <Button
+              onClick={shareOnFacebook}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full"
+            >
+              Share on Facebook
+            </Button>
+            <Button
+              onClick={shareOnTwitter}
+              className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-full"
+            >
+              Share on Twitter
+            </Button>
           </div>
+        </div>
 
-          <div className="text-center md:text-right">
-            <p className="font-serif text-lg text-foreground mb-1">Celebrating {celebrantName}</p>
-            <p className="text-muted-foreground flex items-center justify-center md:justify-end gap-2">
+        <div className="border-t border-blue-700 pt-8">
+          <div className="text-center">
+            <p className="text-blue-100 mb-4 font-serif text-xl">
+              Celebrating {celebrantName}
+            </p>
+            <p className="text-blue-200 flex items-center justify-center gap-2">
               Made with <Heart className="w-4 h-4 text-red-400 fill-red-400" /> by the Family
             </p>
-            <p className="text-muted-foreground text-sm mt-2">{new Date().getFullYear()} - A 70th Birthday Celebration</p>
+            <p className="text-blue-300 text-sm mt-4">
+              {new Date().getFullYear()} - A 70th Birthday Celebration
+            </p>
           </div>
         </div>
       </div>
