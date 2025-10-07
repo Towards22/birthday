@@ -83,7 +83,7 @@ export default function HeroSection({ celebrantName }: HeroSectionProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
       </div>
 
-      <audio ref={audioRef} loop>
+      <audio ref={audioRef} loop autoPlay playsInline>
         <source src="/birthday-song.mp3" type="audio/mpeg" />
       </audio>
 
