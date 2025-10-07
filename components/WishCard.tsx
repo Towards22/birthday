@@ -19,7 +19,7 @@ export default function WishCard({ wish, index }: WishCardProps) {
   const gradients = [
     'from-pink-100 to-pink-200',
     'from-blue-100 to-blue-200',
-    'from-yellow-100 to-yellow-200',
+    'from-cream-100 to-cream-200',
     'from-purple-100 to-purple-200',
     'from-green-100 to-green-200',
   ];
