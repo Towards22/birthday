@@ -31,9 +31,9 @@ export default function GallerySection() {
   };
 
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-white to-blue-50">
+    <section className="relative py-12 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="flex items-center justify-center mb-4">
             <Camera className="w-12 h-12 text-blue-900" />
           </div>
@@ -46,7 +46,7 @@ export default function GallerySection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {galleryImages.map((image, index) => (
             <div
               key={index}
