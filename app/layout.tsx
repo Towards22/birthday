@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   keywords: '70th birthday, birthday celebration, milestone birthday',
 };
 
+import BlockFullStory from '@/components/BlockFullStory';
+
 export default function RootLayout({
   children,
 }: {
@@ -14,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <BlockFullStory />
+        {children}
+      </body>
     </html>
   );
 }
