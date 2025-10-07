@@ -33,7 +33,7 @@ export default function FooterSection({ celebrantName }: FooterSectionProps) {
   };
 
   return (
-    <footer className="relative py-16 px-4 bg-gradient-to-b from-yellow-50 to-blue-900">
+    <footer className="relative py-16 px-4 bg-gradient-to-b from-cream-50 to-blue-900">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
