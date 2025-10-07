@@ -4,9 +4,9 @@ import { Play } from 'lucide-react';
 
 export default function VideoSection() {
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-blue-50 to-pink-50">
+    <section className="relative py-12 px-4 bg-gradient-to-b from-blue-50 to-pink-50">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="flex items-center justify-center mb-4">
             <Play className="w-12 h-12 text-pink-600" />
           </div>
@@ -19,7 +19,7 @@ export default function VideoSection() {
           </p>
         </div>
 
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white p-4">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white p-4 md:p-6">
           <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden">
             <div className="w-full h-full flex items-center justify-center text-gray-500">
               <div className="text-center">
