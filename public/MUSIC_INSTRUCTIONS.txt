@@ -1,0 +1,20 @@
+BACKGROUND MUSIC SETUP
+======================
+
+To enable the background birthday music feature:
+
+1. Obtain a birthday song MP3 file (ensure you have the rights to use it)
+2. Name it exactly: birthday-song.mp3
+3. Place it in this /public folder
+4. The music player in the Hero section will automatically detect and use it
+
+Recommended song length: 2-4 minutes
+Recommended file size: Under 5MB for optimal loading
+
+Popular choices:
+- Traditional "Happy Birthday" instrumental
+- Upbeat celebratory music
+- Meaningful song to the celebrant
+
+Note: The audio will only play after user interaction (clicking the "Play Birthday Music" button)
+to comply with browser autoplay policies.
