@@ -28,7 +28,7 @@ export default function WishCard({ wish, index }: WishCardProps) {
 
   return (
     <div
-      className={`bg-gradient-to-br ${gradient} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+      className={`bg-gradient-to-br ${gradient} rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5`}
     >
       <div className="flex items-start gap-3">
         <div className="bg-white rounded-full p-2 shadow-md">
