@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Share2 } from 'lucide-react';
+import { Heart, Share2, MessageSquare, Facebook, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface FooterSectionProps {
@@ -40,19 +40,39 @@ export default function FooterSection({ celebrantName }: FooterSectionProps) {
             <Share2 className="w-10 h-10 text-foreground" />
           </div>
 
-          <div className="text-center">
+          <div className="text-center animate-fadeIn">
             <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-1">Share the Celebration</h3>
             <p className="text-muted-foreground max-w-xl mx-auto">Help us spread the joy by sharing this special page</p>
 
             <div className="mt-4 flex flex-wrap gap-3 justify-center md:justify-start">
-              <Button onClick={shareOnWhatsApp} className="bg-brand text-[#111827] px-4 py-2 rounded-full shadow-sm">
-                WhatsApp
+              <Button
+                onClick={shareOnWhatsApp}
+                size="icon"
+                variant="ghost"
+                className="hover:bg-brand/10 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+                aria-label="Share on WhatsApp"
+              >
+                <MessageSquare className="w-5 h-5 text-foreground" />
               </Button>
-              <Button onClick={shareOnFacebook} className="bg-blue-600 text-white px-4 py-2 rounded-full shadow-sm">
-                Facebook
+
+              <Button
+                onClick={shareOnFacebook}
+                size="icon"
+                variant="ghost"
+                className="hover:bg-blue-600/10 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                aria-label="Share on Facebook"
+              >
+                <Facebook className="w-5 h-5 text-blue-600" />
               </Button>
-              <Button onClick={shareOnTwitter} className="bg-sky-500 text-white px-4 py-2 rounded-full shadow-sm">
-                Twitter
+
+              <Button
+                onClick={shareOnTwitter}
+                size="icon"
+                variant="ghost"
+                className="hover:bg-sky-500/10 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                aria-label="Share on Twitter"
+              >
+                <Twitter className="w-5 h-5 text-sky-500" />
               </Button>
             </div>
           </div>
