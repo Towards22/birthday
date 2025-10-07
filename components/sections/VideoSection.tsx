@@ -20,14 +20,16 @@ export default function VideoSection() {
         </div>
 
         <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white p-4 md:p-6">
-          <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden">
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              <div className="text-center">
-                <Play className="w-20 h-20 mx-auto mb-4 text-gray-400" />
-                <p className="text-lg">Video placeholder</p>
-                <p className="text-sm mt-2">Replace with actual video embed or upload</p>
-              </div>
-            </div>
+          <div className="aspect-video rounded-2xl overflow-hidden bg-black">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/WxjTFrM245o?rel=0"
+              title="Tribute Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+            />
           </div>
         </div>
 
