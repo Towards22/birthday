@@ -38,12 +38,12 @@ export default function AboutSection({ celebrantName, description }: AboutSectio
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-800 mb-6">
             A Life <span className="text-blue-900">Well Lived</span>
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-8" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-brand to-transparent mx-auto mb-8" />
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-xl">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-brand to-cream-200 flex items-center justify-center shadow-xl">
               <Sparkles className="w-12 h-12 text-white" />
             </div>
           </div>
