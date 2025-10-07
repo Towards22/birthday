@@ -107,7 +107,7 @@ export default function GallerySection() {
             {galleryImages.map((image, index) => (
               <CarouselItem
                 key={index}
-                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 md:basis-1/3"
+                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 basis-full"
                 onClick={() => setSelectedImage(index)}
               >
                 <div className="aspect-square">
