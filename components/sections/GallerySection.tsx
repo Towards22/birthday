@@ -110,7 +110,7 @@ export default function GallerySection() {
                 className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 basis-full"
                 onClick={() => setSelectedImage(index)}
               >
-                <div className="aspect-square">
+                <div className="w-full h-64 md:h-80 lg:h-96 overflow-hidden">
                   <img
                     src={image}
                     alt={`Memory ${index + 1}`}
