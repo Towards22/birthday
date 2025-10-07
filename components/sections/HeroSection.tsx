@@ -15,17 +15,53 @@ export default function HeroSection({ celebrantName }: HeroSectionProps) {
 
   useEffect(() => {
     setCanPlay(true);
+
+    // Try to autoplay on mount. If browser blocks autoplay, keep it muted/paused and let user control.
+    const tryAutoplay = async () => {
+      if (!audioRef.current) return;
+
+      try {
+        audioRef.current.muted = false;
+        // attempt to play; some browsers will reject if not interacted with
+        await audioRef.current.play();
+        setIsMuted(false);
+      } catch (err) {
+        // Autoplay blocked: mute the audio so it can autoplay silently if desired, or keep paused.
+        try {
+          audioRef.current.muted = true;
+          // attempt silent autoplay
+          await audioRef.current.play();
+          // keep muted true to indicate user needs to unmute to hear
+          setIsMuted(true);
+        } catch (silentErr) {
+          // Could not autoplay even muted; leave paused and show control
+          setIsMuted(true);
+          audioRef.current.pause();
+        }
+      }
+    };
+
+    tryAutoplay();
   }, []);
 
-  const toggleMusic = () => {
-    if (audioRef.current) {
-      if (isMuted) {
-        audioRef.current.play();
+  const toggleMusic = async () => {
+    if (!audioRef.current) return;
+
+    if (isMuted) {
+      // try to unmute and play
+      audioRef.current.muted = false;
+      try {
+        await audioRef.current.play();
         setIsMuted(false);
-      } else {
-        audioRef.current.pause();
+      } catch (err) {
+        // If play fails, keep it paused and show the control (user must interact)
+        console.error('Playback failed:', err);
         setIsMuted(true);
       }
+    } else {
+      audioRef.current.pause();
+      audioRef.current.muted = true;
+      setIsMuted(true);
     }
   };
 
@@ -47,7 +83,7 @@ export default function HeroSection({ celebrantName }: HeroSectionProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
       </div>
 
-      <audio ref={audioRef} loop>
+      <audio ref={audioRef} loop autoPlay playsInline>
         <source src="/birthday-song.mp3" type="audio/mpeg" />
       </audio>
 
