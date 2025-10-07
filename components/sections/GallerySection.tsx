@@ -1,15 +1,9 @@
+
 'use client';
 
 import { useState } from 'react';
 import { Camera } from 'lucide-react';
 import GalleryModal from '@/components/GalleryModal';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from '@/components/ui/carousel';
 
 export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -38,57 +32,41 @@ export default function GallerySection() {
   };
 
   return (
-    <section className="relative py-12 px-4 bg-gradient-to-b from-white to-blue-50">
+    <section className="relative py-20 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
             <Camera className="w-12 h-12 text-blue-900" />
           </div>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-800 mb-6">
             A Journey Through <span className="text-blue-900">Time</span>
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-brand to-transparent mx-auto mb-4" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Celebrating precious memories and cherished moments from seven decades of life
           </p>
         </div>
 
-        {/* Responsive carousel: single slide on mobile, 3-per-view on md+ */}
-        <Carousel className="relative">
-          <CarouselContent className="w-full">
-            {galleryImages.map((image, index) => (
-              <CarouselItem
-                key={index}
-                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 md:basis-1/3"
-                onClick={() => setSelectedImage(index)}
-              >
-                <div className="aspect-square">
-                  <img
-                    src={image}
-                    alt={`Memory ${index + 1}`}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                  <Camera className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-
-          {/* Navigation controls for larger screens */}
-          <CarouselPrevious className="hidden md:block" />
-          <CarouselNext className="hidden md:block" />
-
-          {/* Mobile nav overlay (visible on mobile) */}
-          <div className="absolute left-2 top-1/2 -translate-y-1/2 md:hidden">
-            <CarouselPrevious />
-          </div>
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 md:hidden">
-            <CarouselNext />
-          </div>
-        </Carousel>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {galleryImages.map((image, index) => (
+            <div
+              key={index}
+              onClick={() => setSelectedImage(index)}
+              className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="aspect-square">
+                <img
+                  src={image}
+                  alt={`Memory ${index + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                <Camera className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {selectedImage !== null && (
