@@ -41,6 +41,34 @@ export default function GallerySection() {
     }
   };
 
+  // Autoplay + sync current index with embla
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      const idx = emblaApi.selectedScrollSnap();
+      setCurrentIndex(idx);
+    };
+
+    emblaApi.on('select', onSelect);
+    onSelect();
+
+    // start autoplay
+    if (!autoplayRef.current) {
+      autoplayRef.current = window.setInterval(() => {
+        emblaApi.scrollNext();
+      }, 4000);
+    }
+
+    return () => {
+      emblaApi.off('select', onSelect);
+      if (autoplayRef.current) {
+        window.clearInterval(autoplayRef.current);
+        autoplayRef.current = null;
+      }
+    };
+  }, [emblaApi]);
+
   return (
     <section className="relative py-12 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-7xl mx-auto">
