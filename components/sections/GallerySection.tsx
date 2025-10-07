@@ -22,7 +22,7 @@ export default function GallerySection() {
     'https://asset.cloudinary.com/ddxssowqb/077dbb171f568b529fb2142eedaefc75',
     'https://asset.cloudinary.com/ddxssowqb/426aa9104e948e71f49f8390f17ce65f',
     'https://asset.cloudinary.com/ddxssowqb/ed40d31b5a3bde6657a0b496ca32a1a9',
-    'https://asset.cloudinary.com/ddxssowqb/ad0da7c257154312d9d699847f9d025c,
+    'https://asset.cloudinary.com/ddxssowqb/ad0da7c257154312d9d699847f9d025c',
     'https://asset.cloudinary.com/ddxssowqb/0ac0d443b5586f8292a568d709a977d9',
     'https://asset.cloudinary.com/ddxssowqb/0b158bb740278a2c4315ee7cdd526f13',
     'https://asset.cloudinary.com/ddxssowqb/3cb74f3c2affa5c780a53c2f3a645ab0',
